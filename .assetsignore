@@ -1,0 +1,9 @@
+worker
+wrangler.jsonc
+wrangler.toml
+functions
+node_modules
+.git
+.DS_Store
+README.md
+launch-guide.md
