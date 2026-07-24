@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers | Maa &amp; Paa's Homecare Service</title>
+<meta name="description" content="View open positions at Maa & Paa's Homecare Service in The Gambia and apply to join our care team.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.svg" alt="Maa & Paa's Homecare Service logo">
+      <span class="brand-name">Maa &amp; Paa's Homecare<span>...we care like family</span></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="careers.html" class="active">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary">Book Now</a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Careers</h1>
+    <p>Join a team that cares like family. See our current openings below.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container admin-wide">
+    <div id="jobs-list">
+      <p style="text-align:center;color:var(--gray);">Loading open positions...</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-light">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Don't see the right role?</h2>
+      <p>We're always happy to hear from caring, qualified people. Reach out and introduce yourself.</p>
+      <a href="contact.html" class="btn btn-white">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer id="footer-placeholder"></footer>
+
+<script src="js/main.js"></script>
+<script src="js/footer.js"></script>
+<script>
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+async function loadJobs() {
+  var el = document.getElementById('jobs-list');
+  try {
+    var res = await fetch('/api/jobs');
+    var jobs = await res.json();
+    if (!Array.isArray(jobs) || jobs.length === 0) {
+      el.innerHTML = '<div class="empty-state"><h3>No open positions right now</h3><p>Check back soon, or contact us to introduce yourself.</p></div>';
+      return;
+    }
+    el.innerHTML = jobs.map(function (job) {
+      var posted = new Date(job.postedAt);
+      var postedStr = isNaN(posted) ? '' : posted.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      return '<div class="job-card">' +
+        '<div class="job-head"><h3>' + escapeHtml(job.title) + '</h3>' +
+        '<a class="btn btn-outline btn-sm" href="contact.html">Apply</a></div>' +
+        '<div class="job-meta">' +
+        (job.location ? '<span class="badge">' + escapeHtml(job.location) + '</span>' : '') +
+        (job.type ? '<span class="badge">' + escapeHtml(job.type) + '</span>' : '') +
+        (postedStr ? '<span class="badge">Posted ' + postedStr + '</span>' : '') +
+        '</div>' +
+        '<p>' + escapeHtml(job.description) + '</p>' +
+        '</div>';
+    }).join('');
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state"><h3>Couldn\'t load positions</h3><p>Please refresh, or contact us directly.</p></div>';
+  }
+}
+loadJobs();
+</script>
+</body>
+</html>

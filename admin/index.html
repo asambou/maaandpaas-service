@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Maa &amp; Paa's Homecare Service</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body style="background:var(--light-bg);min-height:100vh;">
+
+<header>
+  <div class="nav-wrap">
+    <a href="../index.html" class="brand">
+      <img src="../assets/logo.svg" alt="Maa & Paa's Homecare Service logo">
+      <span class="brand-name">Maa &amp; Paa's Homecare<span>Admin Panel</span></span>
+    </a>
+  </div>
+</header>
+
+<section style="padding:60px 0;">
+  <div class="container">
+
+    <div id="login-view" class="admin-shell" style="display:none;">
+      <div class="admin-card">
+        <h2>Admin Login</h2>
+        <p class="sub">Enter the admin password to manage career postings.</p>
+        <div id="login-msg"></div>
+        <form id="login-form" style="display:grid;gap:16px;">
+          <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="admin-view" class="admin-wide" style="display:none;">
+      <div class="admin-top">
+        <h1 style="font-size:28px;">Manage Careers</h1>
+        <button id="logout-btn" class="btn btn-outline btn-sm">Log Out</button>
+      </div>
+
+      <div class="admin-card" style="margin-bottom:32px;">
+        <h2 style="font-size:20px;">Post a new position</h2>
+        <p class="sub">This appears immediately on the public Careers page.</p>
+        <div id="add-msg"></div>
+        <form id="add-job-form" style="display:grid;gap:16px;">
+          <div>
+            <label for="title">Job Title</label>
+            <input type="text" id="title" name="title" placeholder="e.g. In-Home Caregiver" required>
+          </div>
+          <div class="form-row">
+            <div>
+              <label for="location">Location</label>
+              <input type="text" id="location" name="location" placeholder="e.g. Sanchaba Sulay Jobe">
+            </div>
+            <div>
+              <label for="type">Employment Type</label>
+              <select id="type" name="type" style="width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid #dde6f3;font-family:inherit;font-size:14px;">
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Contract</option>
+                <option>Live-in</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="5" placeholder="Responsibilities, requirements, how to apply..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Post Position</button>
+        </form>
+      </div>
+
+      <h2 style="font-size:20px;margin-bottom:16px;">Current Postings</h2>
+      <div id="jobs-admin-list"><p style="color:var(--gray);">Loading...</p></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function showMsg(el, text, type) {
+  el.innerHTML = '<div class="form-msg ' + type + '">' + escapeHtml(text) + '</div>';
+}
+
+async function checkAuth() {
+  var res = await fetch('/api/admin/check');
+  var data = await res.json();
+  document.getElementById('login-view').style.display = data.authed ? 'none' : 'block';
+  document.getElementById('admin-view').style.display = data.authed ? 'block' : 'none';
+  if (data.authed) loadAdminJobs();
+}
+
+document.getElementById('login-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var password = document.getElementById('password').value;
+  var msgEl = document.getElementById('login-msg');
+  msgEl.innerHTML = '';
+  var res = await fetch('/api/admin/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: password })
+  });
+  var data = await res.json();
+  if (data.ok) {
+    document.getElementById('password').value = '';
+    checkAuth();
+  } else {
+    showMsg(msgEl, data.error || 'Login failed', 'error');
+  }
+});
+
+document.getElementById('logout-btn').addEventListener('click', async function () {
+  await fetch('/api/admin/logout', { method: 'POST' });
+  checkAuth();
+});
+
+document.getElementById('add-job-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var msgEl = document.getElementById('add-msg');
+  msgEl.innerHTML = '';
+  var payload = {
+    title: document.getElementById('title').value,
+    location: document.getElementById('location').value,
+    type: document.getElementById('type').value,
+    description: document.getElementById('description').value
+  };
+  var res = await fetch('/api/admin/jobs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  var data = await res.json();
+  if (data.ok) {
+    showMsg(msgEl, 'Position posted.', 'success');
+    document.getElementById('add-job-form').reset();
+    loadAdminJobs();
+  } else {
+    showMsg(msgEl, data.error || 'Could not post position', 'error');
+  }
+});
+
+async function loadAdminJobs() {
+  var el = document.getElementById('jobs-admin-list');
+  var res = await fetch('/api/jobs');
+  var jobs = await res.json();
+  if (!Array.isArray(jobs) || jobs.length === 0) {
+    el.innerHTML = '<p style="color:var(--gray);">No postings yet.</p>';
+    return;
+  }
+  el.innerHTML = jobs.map(function (job) {
+    return '<div class="admin-job-row">' +
+      '<div><h4>' + escapeHtml(job.title) + '</h4>' +
+      '<p>' + escapeHtml(job.location || '') + (job.location && job.type ? ' &middot; ' : '') + escapeHtml(job.type || '') + '</p></div>' +
+      '<button class="btn btn-danger btn-sm" data-id="' + job.id + '">Delete</button>' +
+      '</div>';
+  }).join('');
+
+  el.querySelectorAll('button[data-id]').forEach(function (btn) {
+    btn.addEventListener('click', async function () {
+      if (!confirm('Delete this posting?')) return;
+      await fetch('/api/admin/jobs?id=' + encodeURIComponent(btn.dataset.id), { method: 'DELETE' });
+      loadAdminJobs();
+    });
+  });
+}
+
+checkAuth();
+</script>
+</body>
+</html>
