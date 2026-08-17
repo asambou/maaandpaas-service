@@ -55,8 +55,8 @@
   <div class="container">
     <div class="cta-banner">
       <h2>Don't see the right role?</h2>
-      <p>We're always happy to hear from caring, qualified people. Reach out and introduce yourself.</p>
-      <a href="contact.html" class="btn btn-white">Contact Us</a>
+      <p>We're always happy to hear from caring, qualified people. Send us your application anytime.</p>
+      <a href="apply.html" class="btn btn-white">Apply Now</a>
     </div>
   </div>
 </section>
@@ -86,7 +86,7 @@ async function loadJobs() {
       var postedStr = isNaN(posted) ? '' : posted.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
       return '<div class="job-card">' +
         '<div class="job-head"><h3>' + escapeHtml(job.title) + '</h3>' +
-        '<a class="btn btn-outline btn-sm" href="contact.html">Apply</a></div>' +
+        '<a class="btn btn-outline btn-sm" href="apply.html?job=' + encodeURIComponent(job.title) + '">Apply</a></div>' +
         '<div class="job-meta">' +
         (job.location ? '<span class="badge">' + escapeHtml(job.location) + '</span>' : '') +
         (job.type ? '<span class="badge">' + escapeHtml(job.type) + '</span>' : '') +
