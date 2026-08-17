@@ -45,7 +45,7 @@
 
 <section>
   <div class="container admin-wide">
-    <form class="contact-form" action="https://formspree.io/f/mkjwqldl" method="POST">
+    <form class="contact-form" action="https://formspree.io/f/YOUR_APPLICATION_FORM_ID" method="POST">
       <input type="hidden" name="_subject" value="New Job Application">
       <input type="hidden" name="_next" value="https://maapaashomecare.com/thank-you.html">
 
@@ -111,9 +111,18 @@
       </div>
 
       <div>
-        <label for="cv">Link to your CV *</label>
-        <input type="url" id="cv" name="CV Link" placeholder="Paste a Google Drive, Dropbox or OneDrive link" required>
-        <p class="form-note">Upload your CV to Google Drive or Dropbox, set sharing to "anyone with the link", then paste the link here.</p>
+        <label for="cv">Link to your CV (optional)</label>
+        <input type="url" id="cv" name="CV Link" placeholder="Paste a Google Drive, Dropbox or OneDrive link">
+        <p class="form-note">Have your CV online? Upload it to Google Drive or Dropbox, set sharing to "anyone with the link", and paste the link here.</p>
+      </div>
+
+      <div style="background:var(--light-bg);border-radius:12px;padding:18px;">
+        <p style="font-weight:600;margin-bottom:6px;">No online CV? No problem.</p>
+        <p style="color:var(--gray);font-size:13.5px;margin-bottom:14px;">Submit this form, then send your CV — a PDF or even a clear photo — straight to us. Please include your full name so we can match it to your application.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://wa.me/2207823944" target="_blank" rel="noopener" class="btn btn-sm" style="background:#25D366;color:#fff;border-color:#25D366;">💬 Send CV on WhatsApp</a>
+          <a href="mailto:info@maapaashomecare.com?subject=My%20CV%20-%20Job%20Application" class="btn btn-outline btn-sm">✉️ Email My CV</a>
+        </div>
       </div>
 
       <div>
