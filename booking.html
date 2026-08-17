@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a FREE Care Assessment | Maa &amp; Paa's Homecare Service</title>
+<meta name="description" content="Book your free, no-obligation home care assessment with Maa & Paa's Homecare Service. Takes 2 minutes to book.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.svg" alt="Maa & Paa's Homecare Service logo">
+      <span class="brand-name">Maa &amp; Paa's Homecare<span>...we care like family</span></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="why-us.html">Why Us</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="booking.html" class="btn btn-primary">Book Now</a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Book Your FREE Care Assessment</h1>
+    <p class="lead" style="margin:10px auto 0;">With Maa &amp; Paa's Homecare Service — a friendly, no-obligation visit to understand your needs.</p>
+    <div class="pill-row">
+      <span class="pill">⏱️ Takes 2 minutes to book</span>
+      <span class="pill">🏠 Assessment lasts 60 minutes</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid-3" style="margin-bottom:52px;">
+      <div class="card">
+        <div class="icon">🏡</div>
+        <h3>In-Home Assessment</h3>
+        <p>A comprehensive needs assessment carried out in the comfort of your own home.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📋</div>
+        <h3>Personalised Care Plan</h3>
+        <p>A care plan created specifically for you and your family's situation.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💷</div>
+        <h3>Transparent Pricing</h3>
+        <p>Clear, honest pricing with no hidden fees — you'll always know where you stand.</p>
+      </div>
+    </div>
+
+    <div class="admin-wide">
+      <div class="section-head" style="margin-bottom:26px;">
+        <h2>Fill in the Booking Form Below</h2>
+        <p>We'll call to arrange a convenient time for your assessment.</p>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <input type="hidden" name="_subject" value="New Care Assessment Booking">
+        <input type="hidden" name="_next" value="https://maapaashomecare.com/thank-you.html">
+
+        <div class="form-row">
+          <div>
+            <label for="title">Title</label>
+            <select id="title" name="Title" style="width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid #dde6f3;font-family:inherit;font-size:14px;">
+              <option>Mr.</option>
+              <option>Mrs.</option>
+              <option>Ms.</option>
+              <option>Miss</option>
+              <option>Dr.</option>
+            </select>
+          </div>
+          <div>
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="First Name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="Last Name" required>
+          </div>
+          <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="Email" placeholder="you@example.com">
+          </div>
+        </div>
+
+        <div>
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="Phone" required>
+          <p class="form-note">We'll call to arrange a convenient time for your assessment.</p>
+        </div>
+
+        <div>
+          <label for="area">Your Area / Town *</label>
+          <input type="text" id="area" name="Area" placeholder="Town or neighbourhood" required>
+          <p class="form-note">To confirm we cover your area.</p>
+        </div>
+
+        <div>
+          <label>How soon do you want care to start?</label>
+          <div class="choice-group">
+            <label><input type="radio" name="Start Timeframe" value="Urgently (1 week)"> Urgently (1 week)</label>
+            <label><input type="radio" name="Start Timeframe" value="Soon (1-2 weeks)"> Soon (1–2 weeks)</label>
+            <label><input type="radio" name="Start Timeframe" value="Planning ahead (2-4 weeks)"> Planning ahead (2–4 weeks)</label>
+            <label><input type="radio" name="Start Timeframe" value="Just exploring options"> Just exploring options</label>
+          </div>
+        </div>
+
+        <div>
+          <label>Who's the care for?</label>
+          <div class="choice-group">
+            <label><input type="radio" name="Care Recipient" value="Myself"> Myself</label>
+            <label><input type="radio" name="Care Recipient" value="My Spouse/Partner"> My Spouse/Partner</label>
+            <label><input type="radio" name="Care Recipient" value="My Parent"> My Parent</label>
+            <label><input type="radio" name="Care Recipient" value="Relative"> Relative</label>
+            <label><input type="radio" name="Care Recipient" value="A Friend"> A Friend</label>
+            <label><input type="radio" name="Care Recipient" value="Other"> Other</label>
+          </div>
+        </div>
+
+        <div>
+          <label for="requests">Special Requests</label>
+          <textarea id="requests" name="Special Requests" rows="4" placeholder="Please tell us anything else you want us to know"></textarea>
+        </div>
+
+        <label class="consent-row">
+          <input type="checkbox" name="Consent" value="Agreed" required>
+          <span>I agree to Maa &amp; Paa's Terms of Service, and agree to being contacted by phone or email. *</span>
+        </label>
+
+        <button type="submit" class="btn btn-primary">Submit Appointment</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="footer-placeholder"></footer>
+
+<script src="js/main.js"></script>
+<script src="js/footer.js"></script>
+</body>
+</html>

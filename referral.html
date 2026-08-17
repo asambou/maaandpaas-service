@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refer a Friend | Maa &amp; Paa's Homecare Service</title>
+<meta name="description" content="Refer a friend to Maa & Paa's Homecare Service — they receive 20% off their first 2 months of care.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.svg" alt="Maa & Paa's Homecare Service logo">
+      <span class="brand-name">Maa &amp; Paa's Homecare<span>...we care like family</span></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="why-us.html">Why Us</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="booking.html" class="btn btn-primary">Book Now</a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Refer a Friend &amp; Get a Voucher</h1>
+    <p class="lead" style="margin:10px auto 0;">Know someone who could use our care? Refer them and they'll receive <strong>20% off their first 2 months</strong> of care.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container admin-wide">
+    <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+      <input type="hidden" name="_subject" value="New Friend Referral">
+      <input type="hidden" name="_next" value="https://maapaashomecare.com/thank-you.html">
+
+      <h2 style="margin-bottom:4px;">Your Details</h2>
+      <div class="form-row">
+        <div>
+          <label for="yourName">Your Name *</label>
+          <input type="text" id="yourName" name="Referrer Name" required>
+        </div>
+        <div>
+          <label for="yourPhone">Your Phone *</label>
+          <input type="tel" id="yourPhone" name="Referrer Phone" required>
+        </div>
+      </div>
+      <div>
+        <label for="yourEmail">Your Email Address</label>
+        <input type="email" id="yourEmail" name="Referrer Email" placeholder="you@example.com">
+      </div>
+
+      <h2 style="margin:14px 0 4px;">Their Details</h2>
+      <div class="form-row">
+        <div>
+          <label for="theirName">Their Name *</label>
+          <input type="text" id="theirName" name="Referred Name" required>
+        </div>
+        <div>
+          <label for="theirPhone">Their Phone Number</label>
+          <input type="tel" id="theirPhone" name="Referred Phone">
+        </div>
+      </div>
+      <div>
+        <label for="theirEmail">Their Email Address</label>
+        <input type="email" id="theirEmail" name="Referred Email" placeholder="their@example.com">
+      </div>
+
+      <div>
+        <label>Care Needed * <span style="font-weight:400;color:var(--gray);">(tick one or many)</span></label>
+        <div class="choice-group">
+          <label><input type="checkbox" name="Care Needed" value="Hospital to Home"> Hospital to Home</label>
+          <label><input type="checkbox" name="Care Needed" value="Personal Care"> Personal Care</label>
+          <label><input type="checkbox" name="Care Needed" value="Companionship"> Companionship</label>
+          <label><input type="checkbox" name="Care Needed" value="Live-in"> Live-in</label>
+        </div>
+      </div>
+
+      <label class="consent-row">
+        <input type="checkbox" name="Consent" value="Confirmed" required>
+        <span>I confirm I have consent to share these details. *</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary">Submit Referral</button>
+    </form>
+  </div>
+</section>
+
+<footer id="footer-placeholder"></footer>
+
+<script src="js/main.js"></script>
+<script src="js/footer.js"></script>
+</body>
+</html>

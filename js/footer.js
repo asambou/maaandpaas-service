@@ -22,18 +22,20 @@ document.addEventListener('DOMContentLoaded', function () {
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
+            <li><a href="why-us.html">Why Choose Us</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
             <li><a href="careers.html">Careers</a></li>
+            <li><a href="referral.html">Refer a Friend</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         <div>
           <h4>Services</h4>
           <ul>
-            <li><a href="services.html">Daily Living Assistance</a></li>
-            <li><a href="services.html">Health Monitoring</a></li>
+            <li><a href="services.html">Personal Care at Home</a></li>
+            <li><a href="services.html">Hospital to Home Recovery</a></li>
             <li><a href="services.html">Companionship Care</a></li>
-            <li><a href="services.html">In-Home Nursing</a></li>
+            <li><a href="booking.html">Book a FREE Assessment</a></li>
           </ul>
         </div>
         <div>
