@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  var form = document.querySelector('.contact-form');
+  // Only the Contact-page mailto form (forms with a Formspree action submit natively).
+  var form = document.querySelector('.contact-form:not([action])');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
