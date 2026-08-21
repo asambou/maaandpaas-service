@@ -340,3 +340,5 @@ form.contact-form{
   .hero-actions .btn{width:100%;text-align:center;}
   .price-card.featured::before{left:50%;transform:translateX(-50%);}
 }
+
+img.feature-visual{object-fit:cover;object-position:center;width:100%;height:100%;}
