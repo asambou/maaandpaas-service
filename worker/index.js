@@ -45,13 +45,37 @@ export default {
       return json(jobs);
     }
 
-    // ---- Admin: login ----
+    // ---- Admin: login (with brute-force rate limiting) ----
     if (path === '/api/admin/login' && method === 'POST') {
       if (!env.ADMIN_PASSWORD) return json({ ok: false, error: 'ADMIN_PASSWORD is not configured' }, { status: 500 });
+
+      const MAX_ATTEMPTS = 5;       // allowed failed tries...
+      const WINDOW_SECONDS = 900;   // ...within this window (15 minutes), then locked out
+      const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+      const rlKey = 'rl:login:' + ip;
+
+      // Block if this IP has already used up its attempts.
+      if (env.JOBS_KV) {
+        const raw = await env.JOBS_KV.get(rlKey);
+        if (raw && parseInt(raw, 10) >= MAX_ATTEMPTS) {
+          return json({ ok: false, error: 'Too many attempts. Please wait about 15 minutes and try again.' }, { status: 429 });
+        }
+      }
+
       const body = await request.json().catch(() => ({}));
       if ((body.password || '') !== env.ADMIN_PASSWORD) {
+        // Record the failed attempt (auto-expires after the window).
+        if (env.JOBS_KV) {
+          const raw = await env.JOBS_KV.get(rlKey);
+          const attempts = raw ? parseInt(raw, 10) : 0;
+          await env.JOBS_KV.put(rlKey, String(attempts + 1), { expirationTtl: WINDOW_SECONDS });
+        }
         return json({ ok: false, error: 'Incorrect password' }, { status: 401 });
       }
+
+      // Success — clear the failed-attempt counter for this IP.
+      if (env.JOBS_KV) await env.JOBS_KV.delete(rlKey);
+
       const token = await sessionToken(env);
       return json({ ok: true }, {
         headers: { 'Set-Cookie': `admin_session=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=43200` }
