@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="why-us.html">Why Choose Us</a></li>
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="careers.html">Careers</a></li>
+            <li><a href="giving-back.html">Giving Back</a></li>
             <li><a href="referral.html">Refer a Friend</a></li>
             <li><a href="agreement.html">Service Agreement</a></li>
             <li><a href="contact.html">Contact</a></li>
