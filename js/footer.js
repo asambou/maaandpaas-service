@@ -59,6 +59,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* ============================================================
+   Add "Giving Back" to the top navigation on every page.
+   (Injected here so we don't have to edit each page's nav by hand.)
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+  var navUl = document.querySelector('header nav ul');
+  if (!navUl) return;
+  if (navUl.querySelector('a[href="giving-back.html"]')) return; // already present
+  var li = document.createElement('li');
+  var a = document.createElement('a');
+  a.href = 'giving-back.html';
+  a.textContent = 'Giving Back';
+  if (location.pathname.indexOf('giving-back') !== -1) a.className = 'active';
+  li.appendChild(a);
+  var contact = navUl.querySelector('a[href="contact.html"]');
+  if (contact && contact.parentNode) {
+    navUl.insertBefore(li, contact.parentNode);
+  } else {
+    navUl.appendChild(li);
+  }
+});
+
+
+/* ============================================================
    Hidden "declassified dossier" easter egg.
    Trigger: tap/click the site logo (top-left crest) 7 times quickly.
    Fully self-contained — styles are injected here, no other files needed.
